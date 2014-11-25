@@ -11,27 +11,18 @@ shinyUI(fluidPage(
     sidebarLayout(
         sidebarPanel(
             fluidRow(h5("Causal Impact takes a Bayesian approach to estimating the effect of 
-                        an intervention, such as an ad campaign.", br(), br(), 
-                        "It only has access to the data itself and when the intervention began.", br(), br(),
-                        "CausalImpact 1.0.3, Brodersen et al.,", br(), "Annals of Applied Statistics (in press). 
-                        http://google.github.io/CausalImpact/")),
+                        an intervention, such as an ad campaign, or in the case of tree ring data,
+                        perhaps a change in climate."
+                        )),
             
-            br(),
+            br(), 
             
             # a select input
             selectInput('dataset', 
-                        fluidRow("Select a data set", br(),
-                                 "Tree ring data has no intervention;", br(), 
-                                 "Simulated data has intervention"),
+                        fluidRow("Select a data set:"),
                         choices = list("Simulated Data", "Tree Ring Data")),
-
-            br(),    
             
-            # text input
-            textInput("randseed", fluidRow("Set the random seed", br(), "(for simulation only):"),
-                      value = "293"),
-            
-            br(),
+            br(), 
             
             # the number of observations
             sliderInput("obs", "Number of Observations:", 
@@ -50,16 +41,28 @@ shinyUI(fluidPage(
             # improvement during treatment or intervention period
             sliderInput("pct_improvement", 
                         fluidRow("Pct Improvement During Intervention", br(),
-                                 "(for simulation only):"),
-                        min = -.02, max = .02, value = .010, step=.002, format="##.###%")
+                                 "(for simulation data only):"),
+                        min = -.02, max = .02, value = .010, step=.002, format="##.###%"), 
+
+            br(),
+            
+            # text input
+            textInput("randseed", fluidRow("Set the random seed", br(), 
+                                           "(for simulation data only):"),
+                      value = "293"),
+            
+            br(),
+            
+            fluidRow(h6("CausalImpact 1.0.3, Brodersen et al.,", br(), "Annals of Applied Statistics (in press). 
+                        http://google.github.io/CausalImpact/"))
         ),
         
         # output panel
         mainPanel(
             
-            plotOutput(outputId = "main_plot", height = "200px"),
+            # plotOutput(outputId = "main_plot", height = "200px"),
             
-            plotOutput(outputId = "causal_plot", height = "300px"),
+            plotOutput(outputId = "causal_plot", height = "450px"),
             
             textOutput(outputId = "causal_summary")
         )

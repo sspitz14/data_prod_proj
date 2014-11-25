@@ -21,21 +21,21 @@ library(CausalImpact)
 
 shinyServer(function(input, output) {
 
-    output$main_plot <- renderPlot({
-        
-        # matplot plots columns of a matrix
-        par(mar=c(2,4,2,2.2))
-        
-        if(input$dataset == "Simulated Data") {
-            matplot(simulate_data(input$obs, input$PIpct, input$pct_improvement, input$randseed), 
-                    type = "l", ylab="", main="Simulated Time Series")   
-            legend("bottomright", inset=c(.03,.4), legend=c("x", "y"), pch='-', 
-                   col=c("red", "black"), text.col=c("red", "black"), horiz=TRUE)
-        }
-        else {
-            matplot(treering[0:input$obs], type = "l", ylab="", main="Tree Ring Time Series")   
-        }
-    })
+#     output$main_plot <- renderPlot({
+#         
+#         # matplot plots columns of a matrix
+#         par(mar=c(2,4,2,2.2))
+#         
+#         if(input$dataset == "Simulated Data") {
+#             matplot(simulate_data(input$obs, input$PIpct, input$pct_improvement, input$randseed), 
+#                     type = "l", ylab="", main="Simulated Time Series")   
+#             legend("bottomright", inset=c(.03,.4), legend=c("x", "y"), pch='-', 
+#                    col=c("red", "black"), text.col=c("red", "black"), horiz=TRUE)
+#         }
+#         else {
+#             matplot(treering[0:input$obs], type = "l", ylab="", main="Tree Ring Time Series")   
+#         }
+#     })
     
 
     output$causal_plot <- renderPlot ({
